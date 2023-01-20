@@ -96,7 +96,7 @@ class SoundCreator:
 
         return
 
-    def append_sinewave(self, freq=440.0, duration_ms=500, volume=0.25):
+    def append_sinewave(self, freq=800.0, duration_ms=500, volume=0.25):
         """
         Appends a beep of length duration_ms to our
         """
@@ -108,9 +108,21 @@ class SoundCreator:
 
         return
 
-    def create_audio_from(self, sequence):
+    def create_audio_from(self, sequence: str, start_delay_ms=None):
+        """Generates Morse Code from a symbol sequence
+
+        Args:
+            sequence (str): Message to be enconded into Morse Code.
+
+        Returns:
+            np_array: audio data for an audio player.
+        """
 
         self.audio = []
+
+        # Add silence at beginning
+        if start_delay_ms:
+            self.append_silence(duration_ms=start_delay_ms)
 
         for character in sequence:
             character = character.upper()

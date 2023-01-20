@@ -55,7 +55,7 @@ with tutorial:
         "To learn the format of this guide, let us begin with the most important morse sequence: the emergency call **SOS**. To learn this sequence, we need two letters: **S** and **O**."
     )
 
-    SOS = {"Letter": ["S", "O"], "Code": ["* * *", "- - -"], "Mnemonic": ["sí-sí-sí", "OH! MY! GOD!"]}
+    SOS = {"Letter": ["S", "O"], "Code": ["▄ ▄ ▄", "▄▄ ▄▄ ▄▄"], "Mnemonic": ["sí-sí-sí", "OH! MY! GOD!"]}
 
     st.table(SOS)
 
@@ -85,7 +85,7 @@ with tutorial:
     game = GameCreator(label="SOS", symbols="OS")
     game.initalize_sequence(length_unit=2, num_units=3)
 
-    audio = sound_module.create_audio_from(game.get_message())
+    audio = sound_module.create_audio_from(game.get_message(), start_delay_ms=1000)
     st.audio(audio, sample_rate=sound_module.sample_rate)
 
     game.Typer()
