@@ -3,7 +3,25 @@ import streamlit as st
 
 
 class GameCreator:
-    def generate_sequence(self, symbols: str, length_unit: int, num_units: int):
+    def __init__(self, label, symbols):
+        self.label = label
+        self.symbols = symbols
+
+    @st.cache(allow_output_mutation=True)
+    def Message(self):
+        return []
+
+    def get_message(self):
+        return self.Message()[0]
+
+    def add_message(self, message):
+        if not self.Message():
+            self.Message().append(message)
+
+    def initalize_sequence(self, length_unit: int, num_units: int):
+        self.add_message(self.generate_sequence(length_unit, num_units))
+
+    def generate_sequence(self, length_unit: int, num_units: int):
         """Creates a random letter sequence of *length_unit* chunks, *num_unit* times.
 
         Args:
@@ -14,42 +32,35 @@ class GameCreator:
 
         seq = []
         for _ in range(num_units):
-            seq.append("".join(random.choices(symbols, k=length_unit)))
+            seq.append("".join(random.choices(self.symbols, k=length_unit)))
 
         return " ".join(seq)
 
-    def typer(self, symbols: str, sequence: str, label: str):
-        """_summary_
+    def Typer(self):
 
-        Args:
-            symbols (str): _description_
-            sequence (str): _description_
-            label (str): _description_
-        """
+        message = self.get_message()
 
-        formatted_symbols = ", ".join(sorted(list(symbols)))
+        formatted_symbols = ", ".join(sorted(list(self.symbols)))
         st.markdown(f"*Available symbols:* **{formatted_symbols}**")
 
-        user_input = st.text_input("**:blue[Type what you hear] 👇**")
+        with st.form(key=self.label, clear_on_submit=True):
+            user_input = st.text_input("**:blue[Type what you hear] 👇**")
 
-        if user_input:
-            # Compare correct sequence with inputed sequence
-            compare = ""
-            print(user_input)
+            if st.form_submit_button("Submit"):
+                user = user_input.upper()
+                answer = message.upper()
+                output = ""
 
-            for c1, c2 in zip(list(sequence), list(user_input)[: len(sequence)]):
-                if c1.upper() == c2.upper():
-                    compare += f":green[{c2}]"
-                if c2 == " ":
-                    compare += " "
-                else:
-                    compare += f":red[{c2}]"
+                for i in range(len(user)):
+                    if user[i] == answer[i]:
+                        output += f":green[{user[i]}]" if user[i] != " " else " "
+                    else:
+                        output += f":red[{user[i]}]" if user[i] != " " else " "
 
-            if len(user_input) > len(sequence):
-                compare += f":orange[{user_input[len(sequence):]}]"
+                st.markdown(f"***Your Answer:*** {output}")
+                st.markdown(f"*Comparison:*  {answer}")
 
-            st.write(compare)
-            st.write(f"Correct: {sequence}")
-
-        if st.button("reset"):
-            pass
+        reset = st.button("Reset")
+        if reset:
+            self.Message().clear()
+            st.experimental_rerun()

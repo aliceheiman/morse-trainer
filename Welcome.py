@@ -10,13 +10,6 @@ tutorial = st.container()
 references = st.container()
 
 sound_module = SoundCreator()
-game_module = GameCreator()
-
-
-@st.cache(allow_output_mutation=True)
-def Sequence():
-    return []
-
 
 with header:
     st.title("Morse Trainer Whop!")
@@ -89,21 +82,13 @@ with tutorial:
     )
 
     # Setup practice level
-    level = {
-        "label": "SOS",
-        "letters": "SO",
-    }
-    new_sequence = game_module.generate_sequence(level["letters"], 2, 2)
+    game = GameCreator(label="SOS", symbols="OS")
+    game.initalize_sequence(length_unit=2, num_units=3)
 
-    if Sequence():
-        sequence = Sequence()[0]
-    else:
-        Sequence().append(new_sequence)
-
-    audio = sound_module.create_audio_from(level["label"])
+    audio = sound_module.create_audio_from(game.get_message())
     st.audio(audio, sample_rate=sound_module.sample_rate)
 
-    game_module.typer(level["letters"], sequence, label=level["label"])
+    game.Typer()
 
 
 with references:
