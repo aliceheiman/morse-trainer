@@ -47,7 +47,7 @@ morse_dict = {
 
 
 class SoundCreator:
-    def __init__(self, dot_length=100, silence_multiplier=2, sample_rate=44100.0):
+    def __init__(self, dot_length=80, silence_multiplier=3, sample_rate=44100.0):
         self.dot_length = dot_length
         self.silence_multiplier = silence_multiplier
         self.sample_rate = sample_rate
