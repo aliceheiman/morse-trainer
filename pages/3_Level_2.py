@@ -67,7 +67,8 @@ with tutorial:
         f"Click play to hear a sequence of U's and A's. **The message consists of {number_to_word[level['num_units_tutorial']]} sequences of {number_to_word[level['length_unit']]} characters**. Type what you hear and press ENTER. The program will give you feedback."
     )
 
-    game_new.initalize_sequence(length_unit=level["length_unit"], num_units=level["num_units_tutorial"])
+    sequence = game_new.generate_sequence(length_unit=level["length_unit"], num_units=level["num_units_tutorial"])
+    game_new.initalize_sequence(sequence)
 
     audio = sound_module.create_audio_from(game_new.get_message(), start_delay_ms=1000)
     st.audio(audio, sample_rate=sound_module.sample_rate)
@@ -79,7 +80,8 @@ with tutorial:
         f"Click play to hear a sequence of all symbols we have learned so far. **The message consists of {number_to_word[level['num_units_all']]} sequences of {number_to_word[level['length_unit']]} characters**. It might take a couple of tries! Type what you hear and press ENTER. The program will give you feedback."
     )
 
-    game_all.initalize_sequence(length_unit=level["length_unit"], num_units=level["num_units_all"])
+    sequence_all = game_new.generate_sequence(length_unit=level["length_unit"], num_units=level["num_units_all"])
+    game_all.initalize_sequence(sequence_all)
     audio = sound_module.create_audio_from(game_all.get_message(), start_delay_ms=1000)
     st.audio(audio, sample_rate=sound_module.sample_rate)
 

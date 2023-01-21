@@ -5,17 +5,16 @@ from symbols import *
 from util import *
 
 header = st.container()
-background = st.container()
 tutorial = st.container()
 
 sound_module = SoundCreator()
 
 # Configuration
 level = {
-    "level": "Level 1",
-    "new_symbols": "KM",
-    "new_label": "KM",
-    "all_label": "KM",
+    "level": "Level 5",
+    "new_symbols": "LO",
+    "new_label": "LO",
+    "all_label": "KMRSUAPTLO",
     "length_unit": 5,
     "num_units_tutorial": 5,
     "num_units_all": 7,
@@ -29,14 +28,7 @@ game_all = GameCreator(label=level["all_label"], symbols=level["all_label"])
 
 with header:
     st.title(level["level"])
-    st.info(f"Welcome to **{level['level']}!** Here we start our journey with the symbols {symbol_msg_bold}.")
-
-with background:
-
-    st.header("Background")
-    st.markdown(
-        "This guide uses the *Koch* method. The characters are played at full speed, but the spacing between symbols and words is increased. We start with two letters, and then build on top of that by adding more characters and eventually forming words."
-    )
+    st.info(f"Welcome to **{level['level']}!** Here we extend our character set with the symbols {symbol_msg_bold}.")
 
 with tutorial:
     st.header("Tutorial")
@@ -74,3 +66,15 @@ with tutorial:
     st.audio(audio, sample_rate=sound_module.sample_rate)
 
     game_new.Typer()
+
+    st.subheader("Practice Everything")
+    st.write(
+        f"Click play to hear a sequence of all symbols we have learned so far. **The message consists of {number_to_word[level['num_units_all']]} sequences of {number_to_word[level['length_unit']]} characters**. It might take a couple of tries! Type what you hear and press ENTER. The program will give you feedback."
+    )
+
+    sequence_all = game_new.generate_sequence(length_unit=level["length_unit"], num_units=level["num_units_all"])
+    game_all.initalize_sequence(sequence_all)
+    audio = sound_module.create_audio_from(game_all.get_message(), start_delay_ms=1000)
+    st.audio(audio, sample_rate=sound_module.sample_rate)
+
+    game_all.Typer()

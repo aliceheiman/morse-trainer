@@ -6,6 +6,7 @@ class GameCreator:
     def __init__(self, label, symbols):
         self.label = label
         self.symbols = symbols
+        self.anagrams = None
 
     @st.cache(allow_output_mutation=True)
     def Message(self):
@@ -18,8 +19,8 @@ class GameCreator:
         if not self.Message():
             self.Message().append(message)
 
-    def initalize_sequence(self, length_unit: int, num_units: int):
-        self.add_message(self.generate_sequence(length_unit, num_units))
+    def initalize_sequence(self, sequence):
+        self.add_message(sequence)
 
     def generate_sequence(self, length_unit: int, num_units: int):
         """Creates a random letter sequence of *length_unit* chunks, *num_unit* times.
@@ -35,6 +36,30 @@ class GameCreator:
             seq.append("".join(random.choices(self.symbols, k=length_unit)))
 
         return " ".join(seq)
+
+    def generate_anagrams(self, filename):
+
+        # load dictionary
+        with open(filename, "r") as f:
+            contents = f.read().split("\n")
+
+        # get all anagrams
+        anagrams = []
+        for word in contents:
+            word_set = set(word.lower())
+            symbol_set = set(self.symbols.lower())
+
+            if word_set.issubset(symbol_set):
+                if word.upper() not in anagrams:
+                    anagrams.append(word.upper())
+
+        self.anagrams = anagrams
+        return anagrams
+
+    def generate_word_sequence(self, num_words: int):
+
+        words = random.choices(self.anagrams, k=num_words)
+        return " ".join(words)
 
     def Typer(self):
 

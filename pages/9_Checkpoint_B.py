@@ -10,7 +10,7 @@ challenge = st.container()
 sound_module = SoundCreator()
 
 # Configuration
-checkpoint = {"name": "Checkpoint A", "symbols": "KMRSUA", "num_words": 10}
+checkpoint = {"name": "Checkpoint B", "symbols": "KMRSUAPTLOWI", "num_words": 10}
 
 symbol_msg_bold = get_symbol_message(checkpoint["symbols"], bold=True)
 symbol_msg = get_symbol_message(checkpoint["symbols"], bold=False)
@@ -21,7 +21,7 @@ game_checkpoint.generate_anagrams(filename="english-words.txt")
 with header:
     st.title(f"{checkpoint['name']}")
     st.info(
-        f"Welcome to **{checkpoint['name']}!** Here, we will practice the symbols {symbol_msg_bold} in a longer format. We will both practice sequences, and start to form our first words!"
+        f"Welcome to **{checkpoint['name']}!** Here, we will practice the symbols {symbol_msg_bold} in a longer format. Let's practice these symbols by forming words!"
     )
 
 with challenge:
