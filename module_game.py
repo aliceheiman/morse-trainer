@@ -95,6 +95,10 @@ class GameCreator:
                 output = ""
 
                 for i in range(len(user)):
+                    if i >= len(answer):
+                        output += f":red[{user[i:]}]"
+                        break
+
                     if user[i] == answer[i]:
                         output += f":green[{user[i]}]" if user[i] != " " else " "
                     else:

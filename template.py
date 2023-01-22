@@ -72,7 +72,7 @@ def generate_level(level):
                 f"Click play to hear a sequence of all symbols we have learned so far. **The message consists of {number_to_word[level['num_units_all']]} sequences of {number_to_word[level['length_unit']]} characters**. It might take a couple of tries! Type what you hear and press ENTER. The program will give you feedback."
             )
 
-            sequence_all = game_new.generate_sequence(
+            sequence_all = game_all.generate_sequence(
                 length_unit=level["length_unit"], num_units=level["num_units_all"]
             )
             game_all.initalize_sequence(sequence_all)

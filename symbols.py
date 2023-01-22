@@ -42,7 +42,7 @@ mnemonics = {
     "R": ("R", "▄ ▄▄ ▄", "a RABB-it"),
     "S": ("S", "▄ ▄ ▄", "sí-sí-sí"),
     "T": ("T", "▄▄", "TALL"),
-    "U": ("U", "▄ ▄ ▄▄", "un-der WHERE?!"),
+    "U": ("U", "▄ ▄ ▄▄", "un-der WHERE?!"),
     "V": ("V", "▄ ▄ ▄ ▄▄", "vic-tor-y VEE"),
     "W": ("W", "▄ ▄▄ ▄▄", "the WORLD WAR"),
     "X": ("X", "▄▄ ▄ ▄ ▄▄", "CROSS at the DOOR"),
