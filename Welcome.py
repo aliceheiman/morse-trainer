@@ -85,7 +85,8 @@ with tutorial:
 
     # Setup practice level
     game = GameCreator(label="SOS", symbols="OS")
-    game.initalize_sequence(length_unit=2, num_units=3)
+    sequence = game.generate_sequence(length_unit=5, num_units=5)
+    game.initalize_sequence(sequence)
 
     audio = sound_module.create_audio_from(game.get_message(), start_delay_ms=1000)
     st.audio(audio, sample_rate=sound_module.sample_rate)
@@ -101,5 +102,7 @@ with references:
     * Streamlit, [API Reference](https://docs.streamlit.io/library/api-reference)
     * Wikipedia, [Morse Code Mnemonic](https://en.wikipedia.org/wiki/Morse_code_mnemonics)
     * Chloe Wooldrage, Medium, ['Morse Code (1836)'](https://medium.com/fgd1-the-archive/morse-code-771534ff98e4)
+    * Quotes, [dwyl](https://github.com/dwyl/quotes/blob/main/quotes.json), [robatron](https://gist.githubusercontent.com/robatron/a66acc0eed3835119817/raw/0e216f8b6036b82de5fdd93526e1d496d8e1b412/quotes.txt), [vinitshahdeo](https://github.com/vinitshahdeo/inspirational-quotes/blob/master/data/data.json), 
+    * Bad Words Corpus, [MauriceButler - badwords](https://github.com/MauriceButler/badwords/blob/master/array.js), [LDNOOBW - List of Dirty Naugthy Obscene and Otherwise Bad Words](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en)
     """
     )

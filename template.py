@@ -77,7 +77,7 @@ def generate_level(level):
         game_all.Typer()
 
 
-def generate_checkpoint(checkpoint, c_type=C_WORDS, ignore=""):
+def generate_checkpoint(checkpoint):
 
     header = st.container()
     challenge = st.container()
@@ -90,24 +90,24 @@ def generate_checkpoint(checkpoint, c_type=C_WORDS, ignore=""):
 
     game_checkpoint = GameCreator(label=checkpoint["name"], symbols=checkpoint["symbols"])
 
-    if c_type == C_WORDS:
+    if checkpoint["c_type"] == C_WORDS:
         game_checkpoint.generate_anagrams(filename="data/english-words.txt")
-    if c_type == C_QUOTES:
-        game_checkpoint.get_quotes(filename="data/cleaned-quotes.txt", ignore=ignore)
+    if checkpoint["c_type"] == C_QUOTES:
+        game_checkpoint.get_quotes(filename="data/cleaned-quotes.txt", ignore=checkpoint["ignore"])
 
     with header:
         st.title(f"{checkpoint['name']}")
         st.info(
-            f"Welcome to **{checkpoint['name']}!** Here, we will practice the symbols {symbol_msg_bold} in a longer format. We will both practice sequences, and start to form our first words!"
+            f"Welcome to **{checkpoint['name']}!** Here, we will practice the symbols {symbol_msg_bold}. {checkpoint['text']}"
         )
 
     with challenge:
         st.header("Challenge Time!")
 
-        if c_type == C_WORDS:
+        if checkpoint["c_type"] == C_WORDS:
             sequence = game_checkpoint.generate_word_sequence(num_words=checkpoint["num_words"])
-        if c_type == C_QUOTES:
-            print(game_checkpoint.quotes)
+        if checkpoint["c_type"] == C_QUOTES:
+            print(len(game_checkpoint.quotes))
             sequence = game_checkpoint.generate_quote()
         else:
             sequence = game_checkpoint.generate_sequence(length_unit=5, num_units=10)

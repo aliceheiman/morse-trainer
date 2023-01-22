@@ -58,7 +58,6 @@ class GameCreator:
         return anagrams
 
     def generate_word_sequence(self, num_words: int):
-
         words = random.choices(self.anagrams, k=num_words)
         return " ".join(words)
 
@@ -78,7 +77,6 @@ class GameCreator:
         return quotes
 
     def generate_quote(self):
-        # return random quote
         return random.choice(self.quotes)
 
     def Typer(self):
