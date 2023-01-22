@@ -1,4 +1,3 @@
-numpy
-pandas
-math
-streamlit
+numpy==1.24.1
+pandas==1.2.4
+streamlit==1.17.0
