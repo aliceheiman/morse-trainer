@@ -7,6 +7,7 @@ class GameCreator:
         self.label = label
         self.symbols = symbols
         self.anagrams = None
+        self.quotes = None
 
     @st.cache(allow_output_mutation=True)
     def Message(self):
@@ -60,6 +61,25 @@ class GameCreator:
 
         words = random.choices(self.anagrams, k=num_words)
         return " ".join(words)
+
+    def get_quotes(self, filename, ignore=""):
+        # load quotes
+        with open(filename, "r") as f:
+            contents = f.read().upper().split("\n")
+
+        character_set = set(self.symbols.upper() + ignore.upper() + " ")
+
+        quotes = [l for l in contents if set(l).issubset(character_set)]
+
+        for s in ignore.upper():
+            quotes = [l.replace(s, "") for l in quotes]
+
+        self.quotes = quotes
+        return quotes
+
+    def generate_quote(self):
+        # return random quote
+        return random.choice(self.quotes)
 
     def Typer(self):
 

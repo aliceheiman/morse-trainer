@@ -13,9 +13,9 @@ sound_module = SoundCreator()
 # Configuration
 level = {
     "level": "Level 1",
-    "new_symbols": "KM",
-    "new_label": "KM",
-    "all_label": "KM",
+    "new_symbols": "ET",
+    "new_label": "ET",
+    "all_label": "ET",
     "length_unit": 5,
     "num_units_tutorial": 5,
     "num_units_all": 7,

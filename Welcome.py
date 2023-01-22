@@ -11,6 +11,8 @@ references = st.container()
 
 sound_module = SoundCreator()
 
+# order = "ETASILONUDRHMFWGCY.,BPKV;:ZJXQ"
+
 with header:
     st.title("Morse Trainer Whop!")
     st.info(
