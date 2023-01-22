@@ -15,7 +15,9 @@ def generate_level(level):
     symbol_msg = get_symbol_message(level["new_symbols"], bold=False)
 
     game_new = GameCreator(label=level["new_label"], symbols=level["new_symbols"])
-    game_all = GameCreator(label=level["all_label"], symbols=level["all_label"])
+
+    if "all_label" in level:
+        game_all = GameCreator(label=level["all_label"], symbols=level["all_label"])
 
     with header:
         st.title(level["level"])
@@ -64,17 +66,20 @@ def generate_level(level):
 
         game_new.Typer()
 
-        st.subheader("Practice Everything")
-        st.write(
-            f"Click play to hear a sequence of all symbols we have learned so far. **The message consists of {number_to_word[level['num_units_all']]} sequences of {number_to_word[level['length_unit']]} characters**. It might take a couple of tries! Type what you hear and press ENTER. The program will give you feedback."
-        )
+        if "all_label" in level:
+            st.subheader("Practice Everything")
+            st.write(
+                f"Click play to hear a sequence of all symbols we have learned so far. **The message consists of {number_to_word[level['num_units_all']]} sequences of {number_to_word[level['length_unit']]} characters**. It might take a couple of tries! Type what you hear and press ENTER. The program will give you feedback."
+            )
 
-        sequence_all = game_new.generate_sequence(length_unit=level["length_unit"], num_units=level["num_units_all"])
-        game_all.initalize_sequence(sequence_all)
-        audio = sound_module.create_audio_from(game_all.get_message(), start_delay_ms=1000)
-        st.audio(audio, sample_rate=sound_module.sample_rate)
+            sequence_all = game_new.generate_sequence(
+                length_unit=level["length_unit"], num_units=level["num_units_all"]
+            )
+            game_all.initalize_sequence(sequence_all)
+            audio = sound_module.create_audio_from(game_all.get_message(), start_delay_ms=1000)
+            st.audio(audio, sample_rate=sound_module.sample_rate)
 
-        game_all.Typer()
+            game_all.Typer()
 
 
 def generate_checkpoint(checkpoint):
@@ -107,10 +112,7 @@ def generate_checkpoint(checkpoint):
         if checkpoint["c_type"] == C_WORDS:
             sequence = game_checkpoint.generate_word_sequence(num_words=checkpoint["num_words"])
         if checkpoint["c_type"] == C_QUOTES:
-            print(len(game_checkpoint.quotes))
             sequence = game_checkpoint.generate_quote()
-        else:
-            sequence = game_checkpoint.generate_sequence(length_unit=5, num_units=10)
 
         game_checkpoint.initalize_sequence(sequence)
 

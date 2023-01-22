@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from symbols import *
 
 ########################################
 # SETUP
@@ -8,36 +9,6 @@ import math
 DOT_LENGTH = 150
 SILENCE_MULTIPLIER = 1
 SAMPLE_RATE = 44100.0
-
-morse_dict = {
-    "A": "*-",
-    "B": "-***",
-    "C": "-*-*",
-    "D": "-**",
-    "E": "*",
-    "F": "**-*",
-    "G": "--*",
-    "H": "****",
-    "I": "**",
-    "J": "*---",
-    "K": "-*-",
-    "L": "*-**",
-    "M": "--",
-    "N": "-*",
-    "O": "---",
-    "P": "*--*",
-    "Q": "--*-",
-    "R": "*-*",
-    "S": "***",
-    "T": "-",
-    "U": "**-",
-    "V": "***-",
-    "W": "*--",
-    "X": "-**-",
-    "Y": "-*--",
-    "Z": "--**",
-}
-
 
 ########################################
 # FUNCTIONS
@@ -54,34 +25,7 @@ class SoundCreator:
         self.long_silence = (4 * dot_length) * silence_multiplier
         self.audio = []
 
-        self.morse_dict = {
-            "A": "*-",
-            "B": "-***",
-            "C": "-*-*",
-            "D": "-**",
-            "E": "*",
-            "F": "**-*",
-            "G": "--*",
-            "H": "****",
-            "I": "**",
-            "J": "*---",
-            "K": "-*-",
-            "L": "*-**",
-            "M": "--",
-            "N": "-*",
-            "O": "---",
-            "P": "*--*",
-            "Q": "--*-",
-            "R": "*-*",
-            "S": "***",
-            "T": "-",
-            "U": "**-",
-            "V": "***-",
-            "W": "*--",
-            "X": "-**-",
-            "Y": "-*--",
-            "Z": "--**",
-        }
+        self.morse_dict = {k: l[1].replace("▄▄", "-").replace("▄", "*").replace(" ", "") for k, l in mnemonics.items()}
 
     def append_silence(self, duration_ms=500):
         """

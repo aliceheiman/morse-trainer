@@ -73,9 +73,9 @@ with tutorial:
         "Could you hear the difference? Try to say the corresponding letter while listening and learn their rhythm. Below you can hear a sequence of S's and O's in action together."
     )
 
-    st.markdown("**Sequence:** SOS OOS SSO SOS")
+    st.markdown("**Sequence:** SOS SOS SOS")
 
-    so_sequence = sound_module.create_audio_from("SOS OOS SSO SOS")
+    so_sequence = sound_module.create_audio_from("SOS SOS SOS")
     st.audio(so_sequence, sample_rate=sound_module.sample_rate)
 
     st.subheader("Practice")
@@ -103,6 +103,6 @@ with references:
     * Wikipedia, [Morse Code Mnemonic](https://en.wikipedia.org/wiki/Morse_code_mnemonics)
     * Chloe Wooldrage, Medium, ['Morse Code (1836)'](https://medium.com/fgd1-the-archive/morse-code-771534ff98e4)
     * Quotes, [dwyl](https://github.com/dwyl/quotes/blob/main/quotes.json), [robatron](https://gist.githubusercontent.com/robatron/a66acc0eed3835119817/raw/0e216f8b6036b82de5fdd93526e1d496d8e1b412/quotes.txt), [vinitshahdeo](https://github.com/vinitshahdeo/inspirational-quotes/blob/master/data/data.json), 
-    * Bad Words Corpus, [MauriceButler - badwords](https://github.com/MauriceButler/badwords/blob/master/array.js), [LDNOOBW - List of Dirty Naugthy Obscene and Otherwise Bad Words](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en)
+    * Bad Words Corpus, [MauriceButler](https://github.com/MauriceButler/badwords/blob/master/array.js), [LDNOOBW](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en)
     """
     )
