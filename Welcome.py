@@ -102,6 +102,8 @@ with references:
     * Streamlit, [API Reference](https://docs.streamlit.io/library/api-reference)
     * Wikipedia, [Morse Code Mnemonic](https://en.wikipedia.org/wiki/Morse_code_mnemonics)
     * Chloe Wooldrage, Medium, ['Morse Code (1836)'](https://medium.com/fgd1-the-archive/morse-code-771534ff98e4)
+    * MorseCode.World, [Morse Code Timing](https://morsecode.world/international/timing.html)
+    * Jon Bloom, ARRL Laboratory, [A Standard for Morse Timing Using the Farnsworth Technique](http://www.arrl.org/files/file/Technology/x9004008.pdf)
     * Quotes, [dwyl](https://github.com/dwyl/quotes/blob/main/quotes.json), [robatron](https://gist.githubusercontent.com/robatron/a66acc0eed3835119817/raw/0e216f8b6036b82de5fdd93526e1d496d8e1b412/quotes.txt), [vinitshahdeo](https://github.com/vinitshahdeo/inspirational-quotes/blob/master/data/data.json), 
     * Bad Words Corpus, [MauriceButler](https://github.com/MauriceButler/badwords/blob/master/array.js), [LDNOOBW](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en)
     """
