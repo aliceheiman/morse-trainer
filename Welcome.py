@@ -44,12 +44,12 @@ with background:
     """
     )
 
-    st.write(
-        'Using mnemonics is a popular way to make learning the morse sequences easier. Below is a visual mnemonic of the morse code alphabet. Read each letter top-down (except Z). The "di" represent short beeps/dots, and the "dah" represent long beeps/dashes.'
-    )
+    # st.write(
+    #     'Using mnemonics is a popular way to make learning the morse sequences easier. Below is a visual mnemonic of the morse code alphabet. Read each letter top-down (except Z). The "di" represent short beeps/dots, and the "dah" represent long beeps/dashes.'
+    # )
 
-    st.image("assets/visualmnemonic.png")
-    st.caption("*[Image Source](https://en.wikipedia.org/wiki/Morse_code_mnemonics)* :sunglasses:")
+    # st.image("assets/visualmnemonic.png")
+    # st.caption("*[Image Source](https://en.wikipedia.org/wiki/Morse_code_mnemonics)* :sunglasses:")
 
 with tutorial:
     st.header("Tutorial")

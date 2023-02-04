@@ -2,29 +2,35 @@ import numpy as np
 import math
 from symbols import *
 
-########################################
-# SETUP
-########################################
-
-DOT_LENGTH = 150
-SILENCE_MULTIPLIER = 1
-SAMPLE_RATE = 44100.0
-
-########################################
-# FUNCTIONS
-########################################
-
 
 class SoundCreator:
-    def __init__(self, dot_length=70, silence_multiplier=4, sample_rate=44100.0):
-        self.dot_length = dot_length
-        self.silence_multiplier = silence_multiplier
-        self.sample_rate = sample_rate
-        self.dash_length = 3 * dot_length
-        self.short_silence = (3 * dot_length) * silence_multiplier
-        self.long_silence = (4 * dot_length) * silence_multiplier
-        self.audio = []
+    def __init__(self, character_speed=22, farnsworth_speed=8, sample_rate=44100.0):
 
+        self.sample_rate = sample_rate
+        self.character_speed = character_speed
+        self.farnsworth_speed = farnsworth_speed
+
+        # Compute timings
+        u = 1.2 / character_speed
+        ta = (60 * character_speed - 37.2 * farnsworth_speed) / (farnsworth_speed * character_speed)
+        tc = (3 * ta) / 19
+        tw = (7 * ta) / 19
+
+        # Convert to milliseconds
+        self.dot_length = round(u * 1000)
+        self.dash_length = round(u * 3 * 1000)
+        self.intra_character_space = round(u * 1000)
+        self.inter_character_space = round(tc * 1000)
+        self.inter_word_space = round(tw * 1000)
+
+        # Debug:
+        # print(f"Dot length: {self.dot_length}")
+        # print(f"Dash length: {self.dash_length}")
+        # print(f"Intra-c: {self.intra_character_space}")
+        # print(f"Inter-c: {self.inter_character_space}")
+        # print(f"Inter-w: {self.inter_word_space}")
+
+        self.audio = []
         self.morse_dict = {k: l[1].replace("▄▄", "-").replace("▄", "*").replace(" ", "") for k, l in mnemonics.items()}
 
     def append_silence(self, duration_ms=500):
@@ -33,12 +39,12 @@ class SoundCreator:
         """
         num_samples = duration_ms * (self.sample_rate / 1000.0)
 
-        for x in range(int(num_samples)):
+        for _ in range(int(num_samples)):
             self.audio.append(0.0)
 
         return
 
-    def append_sinewave(self, freq=800.0, duration_ms=500, volume=0.25):
+    def append_sinewave(self, freq=550.0, duration_ms=500, volume=0.2):
         """
         Appends a beep of length duration_ms to our
         """
@@ -70,7 +76,7 @@ class SoundCreator:
             character = character.upper()
 
             if character in self.morse_dict.keys():
-                for symbol in self.morse_dict[character]:
+                for i, symbol in enumerate(self.morse_dict[character]):
                     if symbol == "*":
                         # Short sound
                         self.append_sinewave(duration_ms=self.dot_length)
@@ -78,13 +84,14 @@ class SoundCreator:
                         # Long sound:
                         self.append_sinewave(duration_ms=self.dash_length)
 
-                    self.append_silence(duration_ms=self.dot_length)
+                    if i + 1 < len(self.morse_dict[character]):
+                        self.append_silence(duration_ms=self.intra_character_space)
 
-                # Add short silence
-                self.append_silence(duration_ms=self.short_silence)
+                # Add inter-character spacing
+                self.append_silence(duration_ms=self.inter_character_space)
 
             if character == " ":
-                # Add long silence
-                self.append_silence(duration_ms=self.long_silence)
+                # Add inter-word spacing
+                self.append_silence(duration_ms=self.inter_word_space)
 
         return np.array(self.audio)
