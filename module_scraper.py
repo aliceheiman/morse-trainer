@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+import json
+import random
 
 
 def clean(data, allowed_symbols):
@@ -32,3 +34,14 @@ def get_nature_briefings():
     # Get their dates
     dates = soup.find_all("time", {"itemprop": "datePublished"})
     dates = [d.text.strip() for d in dates]
+
+    return results, dates
+
+
+def get_shakespeare(sonnet_nr):
+
+    with open("data/shakespeare.json", "r") as f:
+        contents = f.read()
+
+    sonnets = json.loads(contents)
+    return sonnets[sonnet_nr - 1]

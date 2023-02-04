@@ -83,7 +83,7 @@ class GameCreator:
 
         message = self.get_message()
 
-        formatted_symbols = ", ".join(sorted(list(self.symbols)))
+        formatted_symbols = "".join(list(self.symbols)).strip()
         st.markdown(f"*Available symbols:* **{formatted_symbols}**")
 
         with st.form(key=self.label, clear_on_submit=True):
