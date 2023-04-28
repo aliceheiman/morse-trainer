@@ -39,40 +39,64 @@ class GameCreator:
         return " ".join(seq)
 
     def generate_anagrams(self, filename):
+        """
+        Find all possible words with the current symbol set (self.symbols).
 
-        # load dictionary
+        Args:
+            filename (str): The name of the file containing the dictionary of words.
+
+        Returns:
+            list: A list of all anagrams that can be formed using the current symbol set.
+        """
+
+        # Step 1: Read words from the file line by line
         with open(filename, "r") as f:
-            contents = f.read().split("\n")
+            words = f.read().split("\n")
 
-        # get all anagrams
+        # Step 2: Get all anagrams
         anagrams = []
-        for word in contents:
+        symbol_set = set(self.symbols.lower())
+        for word in words:
             word_set = set(word.lower())
-            symbol_set = set(self.symbols.lower())
 
             if word_set.issubset(symbol_set):
                 if word.upper() not in anagrams:
                     anagrams.append(word.upper())
 
+        # Step 3: Save and return the list of anagrams
         self.anagrams = anagrams
         return anagrams
 
     def generate_word_sequence(self, num_words: int):
+        """Assemble possible words into a word sequence."""
         words = random.choices(self.anagrams, k=num_words)
         return " ".join(words)
 
     def get_quotes(self, filename, ignore=""):
-        # load quotes
+        """
+        Get a list of quotes that can be formed using the current symbol set (self.symbols).
+
+        Args:
+            filename (str): The name of the file containing the list of quotes.
+            ignore (str): A string containing characters to ignore in the quotes (optional).
+
+        Returns:
+            list: A list of quotes that can be formed using the current symbol set.
+        """
+
+        # Step 1: Read quotes from the file
         with open(filename, "r") as f:
-            contents = f.read().upper().split("\n")
+            quotes = f.read().upper().split("\n")
 
+        # Step 2: Filter the quotes based on valid characters
         character_set = set(self.symbols.upper() + ignore.upper() + " ")
+        quotes = [q for q in quotes if all(c in character_set for c in q)]
 
-        quotes = [l for l in contents if set(l).issubset(character_set)]
-
+        # Step 3: Remove ignored characters from the quotes
         for s in ignore.upper():
-            quotes = [l.replace(s, "") for l in quotes]
+            quotes = [q.replace(s, "") for q in quotes]
 
+        # Step 4: Save and return the list of quotes
         self.quotes = quotes
         return quotes
 
@@ -80,7 +104,7 @@ class GameCreator:
         return random.choice(self.quotes)
 
     def Typer(self):
-
+        """Component with instructions, audio player, user input, and correction."""
         message = self.get_message()
 
         formatted_symbols = "".join(list(self.symbols)).strip()

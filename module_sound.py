@@ -5,7 +5,6 @@ from symbols import *
 
 class SoundCreator:
     def __init__(self, character_speed=22, farnsworth_speed=8, sample_rate=44100.0):
-
         self.sample_rate = sample_rate
         self.character_speed = character_speed
         self.farnsworth_speed = farnsworth_speed
@@ -23,41 +22,26 @@ class SoundCreator:
         self.inter_character_space = round(tc * 1000)
         self.inter_word_space = round(tw * 1000)
 
-        # Debug:
-        # print(f"Dot length: {self.dot_length}")
-        # print(f"Dash length: {self.dash_length}")
-        # print(f"Intra-c: {self.intra_character_space}")
-        # print(f"Inter-c: {self.inter_character_space}")
-        # print(f"Inter-w: {self.inter_word_space}")
-
+        # Initialize audo array
         self.audio = []
         self.morse_dict = {k: l[1].replace("▄▄", "-").replace("▄", "*").replace(" ", "") for k, l in mnemonics.items()}
 
     def append_silence(self, duration_ms=500):
-        """
-        Adding silence is easy - we add zeros to the end of our array
-        """
+        """Adding silence by appending zeros."""
         num_samples = duration_ms * (self.sample_rate / 1000.0)
 
         for _ in range(int(num_samples)):
             self.audio.append(0.0)
 
-        return
-
     def append_sinewave(self, freq=550.0, duration_ms=500, volume=0.2):
-        """
-        Appends a beep of length duration_ms to our
-        """
-
+        """Appends a beep of length duration_ms"""
         num_samples = duration_ms * (self.sample_rate / 1000.0)
 
         for x in range(int(num_samples)):
             self.audio.append(volume * math.sin(2 * math.pi * freq * (x / self.sample_rate)))
 
-        return
-
     def create_audio_from(self, sequence: str, start_delay_ms=None):
-        """Generates Morse Code from a symbol sequence
+        """Takes a strings sequence and transforms it into a playable Morse audio clip.
 
         Args:
             sequence (str): Message to be enconded into Morse Code.
