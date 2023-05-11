@@ -9,19 +9,18 @@ class GameCreator:
         self.anagrams = None
         self.quotes = None
 
-    @st.cache(allow_output_mutation=True)
-    def Message(self):
-        return []
+    def initalize_message(self, sequence):
+        if "sequence" not in st.session_state:
+            st.session_state.sequence = ""
+
+        if st.session_state.sequence == "":
+            st.session_state.sequence = sequence
 
     def get_message(self):
-        return self.Message()[0]
+        return st.session_state.sequence
 
-    def add_message(self, message):
-        if not self.Message():
-            self.Message().append(message)
-
-    def initalize_sequence(self, sequence):
-        self.add_message(sequence)
+    def reset_message(self):
+        st.session_state.sequence = ""
 
     def generate_sequence(self, length_unit: int, num_units: int):
         """Creates a random letter sequence of *length_unit* chunks, *num_unit* times.
@@ -114,24 +113,24 @@ class GameCreator:
             user_input = st.text_input("**:blue[Type what you hear] 👇**")
 
             if st.form_submit_button("Submit"):
-                user = user_input.upper()
+                user_input = user_input.upper()
                 answer = message.upper()
                 output = ""
 
-                for i in range(len(user)):
+                for i in range(len(user_input)):
                     if i >= len(answer):
-                        output += f":red[{user[i:]}]"
+                        output += f":red[{user_input[i:]}]"
                         break
 
-                    if user[i] == answer[i]:
-                        output += f":green[{user[i]}]" if user[i] != " " else " "
+                    if user_input[i] == answer[i]:
+                        output += f":green[{user_input[i]}]" if user_input[i] != " " else " "
                     else:
-                        output += f":red[{user[i]}]" if user[i] != " " else " "
+                        output += f":red[{user_input[i]}]" if user_input[i] != " " else " "
 
                 st.markdown(f"***Your Answer:*** {output}")
                 st.markdown(f"*Comparison:*  {answer}")
 
         reset = st.button(f"Reset {self.label}")
         if reset:
-            self.Message().clear()
+            self.reset_message()
             st.experimental_rerun()

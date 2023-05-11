@@ -25,7 +25,6 @@ with header:
     st.write("In short, Morse Code is a way to use short beeps and long beeps to convey messages.")
 
 with background:
-
     st.header("The Morse Code Alphabet")
     st.write(
         "Every letter is converted into a sequence of dots and dashes. Dots represent short beeps. Dashes represent long beeps. The most common letters, such as 'E' and 'T', usually have shorter sequences - making them faster to transmit."
@@ -86,7 +85,7 @@ with tutorial:
     # Setup practice level
     game = GameCreator(label="SOS", symbols="OS")
     sequence = game.generate_sequence(length_unit=5, num_units=5)
-    game.initalize_sequence(sequence)
+    game.initalize_message(sequence)
 
     audio = sound_module.create_audio_from(game.get_message(), start_delay_ms=1000)
     st.audio(audio, sample_rate=sound_module.sample_rate)

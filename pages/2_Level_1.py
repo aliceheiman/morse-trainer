@@ -32,7 +32,6 @@ with header:
     st.info(f"Welcome to **{level['level']}!** Here we start our journey with the symbols {symbol_msg_bold}.")
 
 with background:
-
     st.header("Background")
     st.markdown(
         "This guide uses the *Koch* method. The characters are played at full speed, but the spacing between symbols and words is increased. We start with two letters, and then build on top of that by adding more characters and eventually forming words."
@@ -68,7 +67,7 @@ with tutorial:
     )
 
     sequence = game_new.generate_sequence(length_unit=level["length_unit"], num_units=level["num_units_tutorial"])
-    game_new.initalize_sequence(sequence)
+    game_new.initalize_message(sequence)
 
     audio = sound_module.create_audio_from(game_new.get_message(), start_delay_ms=1000)
     st.audio(audio, sample_rate=sound_module.sample_rate)

@@ -18,7 +18,6 @@ with header:
 
 with playground:
     with st.form("free-text"):
-
         #
         text = st.text_area("Translate Message", placeholder="Type your message here...")
 
@@ -45,7 +44,7 @@ with player:
 
     sound_player = SoundCreator(character_speed=character_speed, farnsworth_speed=farnsworth_speed)
     game = GameCreator(label="Practice", symbols=BASIC_SYMBOLS)
-    game.Message().clear()
+    game.reset_message()
 
     option = st.selectbox("What excerpt do you want to practice on?", ("Nature Daily Briefing", "Shakespeare"))
 
@@ -61,7 +60,6 @@ with player:
         sequence = news[op_index]
 
     if option == "Shakespeare":
-
         sonnet_nr = st.slider("Sonnet Number", min_value=1, max_value=154)
 
         sonnet = get_shakespeare(sonnet_nr)
@@ -69,7 +67,7 @@ with player:
         st.write(sonnet["title"])
 
     sequence = clean(sequence, allowed_symbols=BASIC_SYMBOLS)
-    game.initalize_sequence(sequence)
+    game.initalize_message(sequence)
     audio = sound_player.create_audio_from(game.get_message(), start_delay_ms=1000)
     st.audio(audio, sample_rate=sound_player.sample_rate)
 

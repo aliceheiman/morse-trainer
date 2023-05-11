@@ -59,7 +59,7 @@ def generate_level(level):
         )
 
         sequence = game_new.generate_sequence(length_unit=level["length_unit"], num_units=level["num_units_tutorial"])
-        game_new.initalize_sequence(sequence)
+        game_new.initalize_message(sequence)
 
         audio = sound_module.create_audio_from(game_new.get_message(), start_delay_ms=1000)
         st.audio(audio, sample_rate=sound_module.sample_rate)
@@ -75,7 +75,7 @@ def generate_level(level):
             sequence_all = game_all.generate_sequence(
                 length_unit=level["length_unit"], num_units=level["num_units_all"]
             )
-            game_all.initalize_sequence(sequence_all)
+            game_all.initalize_message(sequence_all)
             audio = sound_module.create_audio_from(game_all.get_message(), start_delay_ms=1000)
             st.audio(audio, sample_rate=sound_module.sample_rate)
 
@@ -83,7 +83,6 @@ def generate_level(level):
 
 
 def generate_checkpoint(checkpoint):
-
     header = st.container()
     challenge = st.container()
     reference_table = st.container()
@@ -114,7 +113,7 @@ def generate_checkpoint(checkpoint):
         if checkpoint["c_type"] == C_QUOTES:
             sequence = game_checkpoint.generate_quote()
 
-        game_checkpoint.initalize_sequence(sequence)
+        game_checkpoint.initalize_message(sequence)
 
         audio = sound_module.create_audio_from(game_checkpoint.get_message(), start_delay_ms=1000)
         st.audio(audio, sample_rate=sound_module.sample_rate)
