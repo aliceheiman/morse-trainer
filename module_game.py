@@ -129,6 +129,7 @@ class GameCreator:
 
                 st.markdown(f"***Your Answer:*** {output}")
                 st.markdown(f"*Comparison:*  {answer}")
+                self.reset_message()
 
         reset = st.button(f"Reset {self.label}")
         if reset:
