@@ -55,7 +55,7 @@ def generate_level(level):
 
         st.subheader(f"Practice {symbol_msg}")
         st.write(
-            f"Click play to hear a sequence of U's and A's. **The message consists of {number_to_word[level['num_units_tutorial']]} sequences of {number_to_word[level['length_unit']]} characters**. Type what you hear and press ENTER. The program will give you feedback."
+            f"Click play to hear a mixed sequence of the symbols. **The message consists of {number_to_word[level['num_units_tutorial']]} sequences of {number_to_word[level['length_unit']]} characters**. Type what you hear and press ENTER. The program will give you feedback."
         )
 
         sequence = game_new.generate_sequence(length_unit=level["length_unit"], num_units=level["num_units_tutorial"])
