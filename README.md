@@ -14,9 +14,7 @@
     <br />
     <a href="https://aliceheiman-morse-trainer-welcome-lz71dz.streamlit.app/">View Demo</a>
     ·
-    <a href="https://github.com/aliceheiman/morse-trainer/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/aliceheiman/morse-trainer/issues">Request Feature</a>
+    <a href="https://blog.streamlit.io/learn-morse-code-with-a-streamlit-app/">View Writeup</a>
   </p>
 </div>
 
@@ -25,7 +23,7 @@
 
 I built this web app to help me learn Morse Code. It was also a great opportunity to explore the Python library called Streamlit. The trainer consists of a series of levels, where you incrementally learn and test yourself on new characters and symbols. The order is computed to help you form sentences as soon as possible. The Challenge levels use real words and inspirational quotes. The Playground page allows you to set custom speeds, input your own message to be translated, and even fetch news and sequences from literary works to practice on!
 
-[You can find the application here](https://aliceheiman-morse-trainer-welcome-lz71dz.streamlit.app/)
+**🎉 The project won Streamlit App of the Day! You can read the official [writeup here](https://blog.streamlit.io/learn-morse-code-with-a-streamlit-app/) and the [application here](https://aliceheiman-morse-trainer-welcome-lz71dz.streamlit.app/)**
 
 ![Morse Trainer Front Page](https://github.com/aliceheiman/morse-trainer/blob/main/assets/front-page.png)
 
