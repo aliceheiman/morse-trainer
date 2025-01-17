@@ -73,7 +73,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Alice Heiman - kod@heiman.com
+Alice Heiman - aheiman@stanford.edu
 
 Project Link: [https://github.com/aliceheiman/morse-trainer](https://github.com/aliceheiman/morse-trainer)
 
